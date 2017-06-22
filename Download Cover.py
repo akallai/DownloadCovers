@@ -45,6 +45,7 @@ def DownloadPicture(link, where):
     if link=="":
         return 0
     try:
+        print(link)
         v = urllib.request.urlopen(link)
         inhalt=str(v.read())
         keywordplace=link.find(r"/rm")
@@ -57,7 +58,7 @@ def DownloadPicture(link, where):
         resultlink=inhalt[stelle+7:stelle+stelle2+4]
         urllib.request.urlretrieve(resultlink,where)
         print("Cover heruntergeladen...")
-    except expression as identifier:
+    except:
         print("Cover konnte nicht heruntergeladen werden!")
 
 def FindTitle(words):
@@ -94,7 +95,8 @@ def FindTitle(words):
     answer=str.replace(answer, r"\'", "'")
     answer=str.replace(answer, r"\xc3\x9f", "ß")
     answer=str.replace(answer, r"\xc3\x84", "ä")
- 
+    answer=str.replace(answer, r"\xc3\xbc", "ä")
+    
     #filtert bug im Titel bei TV-Serien u.ä. raus
     isnofilm=answer.find(r"&quot; ")
     if isnofilm!=-1:
