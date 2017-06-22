@@ -35,7 +35,7 @@ def iterateFolder(folder):
                 stelle1=reversePath.find("\\")
                 stelle1=len(path)-stelle1
                 foldername=path[stelle1:]
-                print("lade Cover für %s" % foldername)
+                print(foldername,end='')
                 DownloadPicture(FindTitle(foldername),os.path.join(subdir, "folder.jpg"))
             ersterDurchlauf=False
             
@@ -45,7 +45,6 @@ def DownloadPicture(link, where):
     if link=="":
         return 0
     try:
-        print(link)
         v = urllib.request.urlopen(link)
         inhalt=str(v.read())
         keywordplace=link.find(r"/rm")
@@ -96,12 +95,12 @@ def FindTitle(words):
     answer=str.replace(answer, r"\xc3\x9f", "ß")
     answer=str.replace(answer, r"\xc3\x84", "ä")
     answer=str.replace(answer, r"\xc3\xbc", "ä")
-    
+
     #filtert bug im Titel bei TV-Serien u.ä. raus
     isnofilm=answer.find(r"&quot; ")
     if isnofilm!=-1:
         answer=answer[isnofilm+7:]
-    print("Cover gefunden für: %s"%answer)
+    print("->%s"%answer)
     if sameYear(words, answer)==False:
         errorList.append(words)
         f=open(errorListPlace+r"\fehlerliste.txt",mode="a")
